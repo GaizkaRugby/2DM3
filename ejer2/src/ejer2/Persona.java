@@ -43,7 +43,4 @@ public abstract class Persona {
 		DNI = dNI;
 	}
 	
-	public abstract void mostrarPersona();
-	
-	
 }
