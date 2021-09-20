@@ -1,8 +1,9 @@
+package fichero;
 import java.io.*;
 public class fichero {
-	
+
 	public static void main(String[] args) {
-	
+		
 		String dir=".";
 		File f = new File(dir);
 		String[] archivos=f.list();
@@ -13,5 +14,5 @@ public class fichero {
 
 		}
 	}
-	
+
 }
