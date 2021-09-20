@@ -9,13 +9,13 @@ public class Ejer2 {
 		
 		do {
 			do {
-				System.out.println("¿Que deseas hacer?");
+				System.out.println("Â¿Que deseas hacer?");
 				System.out.println("1.Dar de alta a un alumno.");
 				System.out.println("2.Dar de alta a un profesor.");
 				System.out.println("3.Ver alumnos de primero");
 				System.out.println("4.Ver alumnos de segundo.");
 				System.out.println("5.Mostrar porcentaje de alumnos aprobados.");
-				System.out.println("6.Mostrar el profesor con más asignaturas y que además sea tutor");
+				System.out.println("6.Mostrar el profesor con mÃ¡s asignaturas y que ademÃ¡s sea tutor");
 				System.out.println("7.Salir");
 				opciones=sc.nextInt();
 				
@@ -49,22 +49,22 @@ public class Ejer2 {
 		int c;
 		double nota;
 		
-		System.out.println("¿Cual es el nombre del nuevo alumno?");
+		System.out.println("Â¿Cual es el nombre del nuevo alumno?");
 		n=sc.next();
 	
-		System.out.println("¿Cual es el apellido del nuevo alumno?");
+		System.out.println("Â¿Cual es el apellido del nuevo alumno?");
 		a=sc.next();
 		
-		System.out.println("¿Cual es el telefono del nuevo alumno?");
+		System.out.println("Â¿Cual es el telefono del nuevo alumno?");
 		t=sc.next();
 		
-		System.out.println("¿Cual es el DNI del nuevo alumno?");
+		System.out.println("Â¿Cual es el DNI del nuevo alumno?");
 		d=sc.next();
 		
-		System.out.println("¿Que curso esta cursando el nuevo alumno(1 o 2)?");
+		System.out.println("Â¿Que curso esta cursando el nuevo alumno(1 o 2)?");
 		c=sc.nextInt();
 		
-		System.out.println("¿Cual es la nota del nuevo alumno?");
+		System.out.println("Â¿Cual es la nota del nuevo alumno?");
 		nota=sc.nextDouble();
 		System.out.println();
 		
@@ -76,19 +76,19 @@ public class Ejer2 {
 		boolean tut=true;
 		int cantidad, tutor;
 		
-		System.out.println("¿Cual es el nombre del nuevo profesor?");
-		n=sc.nextLine();
+		System.out.println("Â¿Cual es el nombre del nuevo profesor?");
+		n=sc.next();
 		
-		System.out.println("¿Cual es el apellido del nuevo profesor?");
-		a=sc.nextLine();
+		System.out.println("Â¿Cual es el apellido del nuevo profesor?");
+		a=sc.next();
 		
-		System.out.println("¿Cual es el telefono del nuevo profesor?");
-		t=sc.nextLine();
+		System.out.println("Â¿Cual es el telefono del nuevo profesor?");
+		t=sc.next();
 		
-		System.out.println("¿Cual es el DNI del nuevo profesor?");
-		d=sc.nextLine();
+		System.out.println("Â¿Cual es el DNI del nuevo profesor?");
+		d=sc.next();
 		
-		System.out.println("¿Es el nuevo profesor tutor(1 para si, 2 para no)?");
+		System.out.println("Â¿Es el nuevo profesor tutor(1 para si, 2 para no)?");
 		tutor=sc.nextInt();
 		
 		switch(tutor){
@@ -98,7 +98,7 @@ public class Ejer2 {
 			break;
 		}
 		
-		System.out.println("¿Cuantas asignaturas da el nuevo profesor?");
+		System.out.println("Â¿Cuantas asignaturas da el nuevo profesor?");
 		cantidad=sc.nextInt();
 		System.out.println();
 		Profesores profe=new Profesores(n,a,t,d,tut,cantidad);

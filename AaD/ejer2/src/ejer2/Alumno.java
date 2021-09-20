@@ -1,6 +1,7 @@
 package ejer2;
 
 public class Alumno extends Persona{
+
 	private int curso;
 	private double nota;
 	
@@ -9,7 +10,7 @@ public class Alumno extends Persona{
 	}
 	
 	public Alumno(String nombre, String apellido, String telefono, String DNI, int curso, double nota) {
-		super();
+		super(nombre,apellido,telefono,DNI);
 		this.curso = curso;
 		this.nota = nota;
 	}

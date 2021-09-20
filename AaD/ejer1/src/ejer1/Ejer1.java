@@ -3,13 +3,13 @@ package ejer1;
 /*
 Realizar un programa Java, en el que se dan de alta alumnos de la escuela, y posteriormente mostrar sus datos.
 
-1.Preguntar cuántos alumnos matriculados hay y guardar esa cantidad.
-2.Según el número de alumnos matriculados, preguntar sus nombres y sus edades.
-3.Mostrar la información obtenida anteriormente: Nombre y edad de cada alumno
+1.Preguntar cuÃ¡ntos alumnos matriculados hay y guardar esa cantidad.
+2.SegÃºn el nÃºmero de alumnos matriculados, preguntar sus nombres y sus edades.
+3.Mostrar la informaciÃ³n obtenida anteriormente: Nombre y edad de cada alumno
 4.Obtener la media de la edades de los alumnos
-5.Mostrar qué alumno es el que tiene mayor edad (mostrando el alumno y su edad)
-6.Mostrar qué alumno es el que tiene menor edad (mostrando el alumno y su edad)
-7.Obtener el alumno con el nombre más largo.
+5.Mostrar que alumno es el que tiene mayor edad (mostrando el alumno y su edad)
+6.Mostrar que alumno es el que tiene menor edad (mostrando el alumno y su edad)
+7.Obtener el alumno con el nombre mÃ¡s largo.
 */
 
 import java.util.Scanner;
@@ -24,7 +24,7 @@ public class Ejer1 {
 			esEntero=sc.hasNextInt();
 			while(!esEntero) {
 				sc.nextLine();
-				System.out.println("Introduce un número válido:");
+				System.out.println("Introduce un nÃºmero vÃ¡lido:");
 				esEntero=sc.hasNextInt();
 			};
 			
@@ -38,7 +38,7 @@ public class Ejer1 {
 			nombre=sc.next();
 			
 			/*while(!sc.hasNextLine()) {
-				System.out.println("Escribe un nombre válido");
+				System.out.println("Escribe un nombre vÃ¡lido");
 				nombre=sc.nextLine();
 			};*/
 		
@@ -52,7 +52,7 @@ public class Ejer1 {
 			e=sc.nextInt();
 		
 			/*while(sc.hasNextInt()) {
-				System.out.println("Introduce una edad válida:");
+				System.out.println("Introduce una edad vÃ¡lida:");
 				e=sc.nextInt();
 			};*/
 		
@@ -114,7 +114,7 @@ public class Ejer1 {
 			System.out.println();
 		}
 		
-		System.out.println("La media de edad es de "+m+" años.");
+		System.out.println("La media de edad es de "+m+" aÃ±os.");
 		System.out.println();
 		
 		System.out.println("El alumno mas mayor de todos es:");

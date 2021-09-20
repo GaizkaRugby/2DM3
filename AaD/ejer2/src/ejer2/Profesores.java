@@ -8,9 +8,8 @@ public class Profesores extends Persona{
 		
 	}
 	
-	public Profesores(String nombre, String apellido, String telefono, String DNI, boolean esTutor,
-			int cantidadAsignaturas) {
-		super();
+	public Profesores(String nombre, String apellido, String telefono, String DNI, boolean esTutor, int cantidadAsignaturas) {
+		super(nombre,apellido,telefono,DNI);
 		this.esTutor = esTutor;
 		this.cantidadAsignaturas = cantidadAsignaturas;
 	}
