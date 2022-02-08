@@ -7,10 +7,10 @@ import re
 from datetime import datetime
 
 class director(models.Model):
-    _name = "director"
+    _name = "director"#nombre de clase/tabla
     _descripcion = "Director de la pelicula"
 
-    _rec_name = "nombre"
+    _rec_name = "nombre"#clave primaria
     
     nombre = fields.Char(size=20, string='Nombre del director', required=True)
     fnac = fields.Date(string='Fecha de nacimiento', required=True)
@@ -57,8 +57,9 @@ class pelicula(models.Model):
     
     @api.constrains('anio')
     def validarAnio(self):
-        if self.anio < datetime.strptime("01/01/1895","%d/%m/%Y").date():
-            raise ValidationError("La pelicula ha de ser posterior a 1895")
+        if self.anio:
+            if self.anio < datetime.strptime("01/01/1895","%d/%m/%Y").date():
+                raise ValidationError("La pelicula ha de ser posterior a 1895")
 
 
 class reparto(models.Model):
