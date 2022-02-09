@@ -1,146 +1,5 @@
 <odoo>
   <data>
-    <!--cliente-->
-    <record id="cliente_view_form" model="ir.ui.view">
-      <field name="name">cliente.view.form</field>
-      <field name="model">cliente</field>
-      <field name="arch" type="xml">
-        <form string="Form cliente">
-          <sheet>
-            <group>
-              <field name="usuario" />
-              <field name="nombre" />
-              <field name="clave" />
-              <field name="email" />
-              <field name="puja" />
-            </group>
-          </sheet>
-        </form>
-      </field>
-    </record>
-
-    <record id="cliente_view_tree" model="ir.ui.view">
-      <field name="name">cliente.view.tree</field>
-      <field name="model">cliente</field>
-      <field name="arch" type="xml">
-        <tree string="Tree cliente">
-          <field name="usuario" />
-          <field name="nombre" />
-          <field name="clave" />
-          <field name="email" />
-          <field name="puja" />
-        </tree>
-      </field>
-    </record>
-
-    <record id="cliente_action" model="ir.actions.act_window">
-      <field name="name">cliente</field>
-      <field name="res_model">cliente</field>
-      <field name="view_mode">tree,form</field>
-    </record>
-
-    <menuitem
-      id="cliente_menu"
-      name="cliente"
-      action="cliente_action"
-      sequence="11"/>
-
-    
-    <!--lote-->
-    <record id="lote_view_form" model="ir.ui.view">
-      <field name="name">lote.view.form</field>
-      <field name="model">lote</field>
-      <field name="arch" type="xml">
-        <form string="Form lote">
-          <sheet>
-            <group>
-              <field name="catnum" />
-              <field name="salida" />
-              <field name="pujamax" />
-              <field name="tiempo" />
-              <field name="esDirige" />
-              <field name="peliRep" />
-            </group>
-          </sheet>
-        </form>
-      </field>
-    </record>
-
-    <record id="lote_view_tree" model="ir.ui.view">
-      <field name="name">lote.view.tree</field>
-      <field name="model">lote</field>
-      <field name="arch" type="xml">
-        <tree string="Tree lote">
-          <field name="catnum" />
-          <field name="salida" />
-          <field name="pujamax" />
-          <field name="tiempo" />
-          <field name="many2one" />
-          <field name="one2many" />
-        </tree>
-      </field>
-    </record>
-
-    <record id="lote_action" model="ir.actions.act_window">
-      <field name="name">lote</field>
-      <field name="res_model">lote</field>
-      <field name="view_mode">tree,form</field>
-    </record>
-
-    <menuitem
-      id="lote_menu"
-      name="lote"
-      action="lote_action"
-      sequence="11"/>
-      
-    
-    <!--puja-->
-    <record id="puja_view_form" model="ir.ui.view">
-      <field name="name">puja.view.form</field>
-      <field name="model">puja</field>
-      <field name="arch" type="xml">
-        <form string="Form de puja">
-          <sheet>
-            <group>
-              <field name="cantidad" />
-              <field name="dia" />
-              <field name="hora" />
-              <field name="many" />
-              <field name="many" />
-            </group>
-          </sheet>
-        </form>
-      </field>
-    </record>
-
-    <record id="puja_view_tree" model="ir.ui.view">
-      <field name="name">puja.view.tree</field>
-      <field name="model">puja</field>
-      <field name="arch" type="xml">
-        <tree string="Tree de puja">
-          <field name="cantidad" />
-          <field name="dia" />
-          <field name="hora" />
-          <field name="many" />
-          <field name="many" />
-        </tree>
-      </field>
-    </record>
-
-    <record id="puja_action" model="ir.actions.act_window">
-      <field name="name">puja</field>
-      <field name="res_model">puja</field>
-      <field name="view_mode">tree,form</field>
-    </record>
-
-    <menuitem
-      id="puja_menu"
-      name="puja"
-      action="puja_action"
-      sequence="11"/>
-
-    
-    <!--producto-->
     <record id="producto_view_form" model="ir.ui.view">
       <field name="name">producto.view.form</field>
       <field name="model">producto</field>
@@ -152,7 +11,8 @@
               <field name="nombre" />
               <field name="desc" />
               <field name="foto" />
-              <field name="many2one" />
+
+              <field name="proLot" />
             </group>
           </sheet>
         </form>
@@ -164,11 +24,9 @@
       <field name="model">producto</field>
       <field name="arch" type="xml">
         <tree string="Tree de producto">
-          <field name="codigo" />
           <field name="nombre" />
           <field name="desc" />
           <field name="foto" />
-          <field name="many2one" />
         </tree>
       </field>
     </record>
@@ -181,66 +39,140 @@
 
     <menuitem
       id="producto_menu"
-      name="producto"
+      name="Producto"
       action="producto_action"
-      sequence="11"/>
+      sequence="10"/>
 
 
-    <!-- explicit list view definition -->
-    <!--
-    <record model="ir.ui.view" id="/root/plantilla.list">
-      <field name="name">/root/plantilla list</field>
-      <field name="model">/root/plantilla./root/plantilla</field>
+    <record id="lote_view_form" model="ir.ui.view">
+      <field name="name">lote.view.form</field>
+      <field name="model">lote</field>
       <field name="arch" type="xml">
-        <tree>
-          <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
+        <form string="Form de lote">
+          <sheet>
+            <group>
+              <field name="catnum" />
+              <field name="salida" />
+              <field name="pujamax" />
+              <field name="tiempo" />
+
+              <field name="lotPro" />
+              <field name="lotPuj" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="lote_view_tree" model="ir.ui.view">
+      <field name="name">lote.view.tree</field>
+      <field name="model">lote</field>
+      <field name="arch" type="xml">
+        <tree string="Tree de lote">
+          <field name="salida" />
+          <field name="pujamax" />
+          <field name="tiempo" />
         </tree>
       </field>
     </record>
--->
 
-    <!-- actions opening views on models -->
-    <!--
-    <record model="ir.actions.act_window" id="/root/plantilla.action_window">
-      <field name="name">/root/plantilla window</field>
-      <field name="res_model">/root/plantilla./root/plantilla</field>
+    <record id="lote_action" model="ir.actions.act_window">
+      <field name="name">lote</field>
+      <field name="res_model">lote</field>
       <field name="view_mode">tree,form</field>
     </record>
--->
 
-    <!-- server action to the one above -->
-    <!--
-    <record model="ir.actions.server" id="/root/plantilla.action_server">
-      <field name="name">/root/plantilla server</field>
-      <field name="model_id" ref="model_/root/plantilla_/root/plantilla"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": model._name,
-        }
+    <menuitem
+      id="lote_menu"
+      name="Lote"
+      action="lote_action"
+      sequence="10"/>
+
+
+    <record id="puja_view_form" model="ir.ui.view">
+      <field name="name">puja.view.form</field>
+      <field name="model">puja</field>
+      <field name="arch" type="xml">
+        <form string="Form de puja">
+          <sheet>
+            <group>
+              <field name="dia" />
+              <field name="hora" />
+              <field name="cantidad" />
+
+              <field name="pujLot" />
+              <field name="pujCli" />
+            </group>
+          </sheet>
+        </form>
       </field>
     </record>
--->
 
-    <!-- Top menu item -->
-    <!--
-    <menuitem name="/root/plantilla" id="/root/plantilla.menu_root"/>
--->
-    <!-- menu categories -->
-    <!--
-    <menuitem name="Menu 1" id="/root/plantilla.menu_1" parent="/root/plantilla.menu_root"/>
-    <menuitem name="Menu 2" id="/root/plantilla.menu_2" parent="/root/plantilla.menu_root"/>
--->
-    <!-- actions -->
-    <!--
-    <menuitem name="List" id="/root/plantilla.menu_1_list" parent="/root/plantilla.menu_1"
-              action="/root/plantilla.action_window"/>
-    <menuitem name="Server to list" id="/root/plantilla" parent="/root/plantilla.menu_2"
-              action="/root/plantilla.action_server"/>
--->
+    <record id="puja_view_tree" model="ir.ui.view">
+      <field name="name">puja.view.tree</field>
+      <field name="model">puja</field>
+      <field name="arch" type="xml">
+        <tree string="Tree de puja">
+          <field name="dia" />
+          <field name="hora" />
+          <field name="cantidad" />
+        </tree>
+      </field>
+    </record>
+
+    <record id="puja_action" model="ir.actions.act_window">
+      <field name="name">puja</field>
+      <field name="res_model">puja</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+      id="pouja_menu"
+      name="Puja"
+      action="puja_action"
+      sequence="10"/>
+
+
+    <record id="cliente_view_form" model="ir.ui.view">
+      <field name="name">cliente.view.form</field>
+      <field name="model">cliente</field>
+      <field name="arch" type="xml">
+        <form string="Form de cliente">
+          <sheet>
+            <group>
+              <field name="usuario" />
+              <field name="clave" />
+              <field name="email" />
+              <field name="nombre" />
+
+              <field name="cliPuj" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="cliente_view_tree" model="ir.ui.view">
+      <field name="name">cliente.view.tree</field>
+      <field name="model">cliente</field>
+      <field name="arch" type="xml">
+        <tree string="Tree de cliente">
+          <field name="usuario" />
+          <field name="email" />
+        </tree>
+      </field>
+    </record>
+
+    <record id="cliente_action" model="ir.actions.act_window">
+      <field name="name">cliente</field>
+      <field name="res_model">cliente</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+      id="cliente_menu"
+      name="Cliente"
+      action="cliente_action"
+      sequence="10"/>
   </data>
 </odoo>

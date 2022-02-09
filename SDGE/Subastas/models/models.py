@@ -1,93 +1,92 @@
 # -*- coding: utf-8 -*-
-# from xml.dom import ValidationErr
-import string
-from odoo import models, fields, api#, exceptions
+
+from email.policy import default
+from odoo import models, fields, api
 from odoo.exceptions import ValidationError 
-import re
 
 from datetime import datetime
 
-class cliente(models.Model):
-    _name = "cliente"
-    _descripcion = "cliente del lote"
 
-    _rec_name = "usuario"
-    
-    usuario = fields.Char(size=20, string='usuario del cliente', required=True)
-    nombre = fields.Char(size=20, string='nombre del cliente', required=True)
-    clave = fields.Char(size=20, string='clave del cliente')
-    email = fields.Char(string='email')
-    puja = fields.Float(string='puja')
-    
-    dirige = fields.One2many(comodel_name='puja', inverse_name='espujacli', string='Dirige')
+class producto(models.Model):
+    _name = "producto"
+    _description = "Producto a subastar"
 
-    @api.constrains('nombre')
-    def validarNombre(self):
-        sql = """SELECT nombre FROM cliente"""
-        self.env.cr.execute(sql)
-        cont=0
-        for rec in self.env.cr.fetchall():
-            if self.nombre==rec[0]:
-                cont+=1
-                if cont > 1:
-                    raise ValidationError("No puede haber dos clientees con el mismo nombre")
+    _rec_name = "nombre"
 
-    @api.constrains('fnac')
-    def validarAnioNacimiento(self):
-        if self.fnac > datetime.now().date():
-            raise ValidationError("La fecha de nacimiento no puede ser mayor a la actual")
+    codigo = fields.Integer(string='Código', required=True, default=000)
+    nombre = fields.Char(size=15, string='Nombre', required=True)
+    desc = fields.Char(size=50, string='Descripción')
+    foto = fields.Binary('foto')
 
+    proLot = fields.Many2one(comodel_name='lote', string='Pertenece a')
+
+    @api.constrains('codigo')
+    def validarCodigo(self):
+        if len(str(self.codigo))!=3:
+            raise ValidationError("El codigo ha de ser de tres cifras")
 
 class lote(models.Model):
     _name = "lote"
-    _descripcion = "lote descripcion"
+    _descripcion = "Lote de productos"
 
     _rec_name = "catnum"
 
-    catnum = fields.Char(size=40, string='Titulo', required=True)
-    salida = fields.Date(string='Año', required=True)
-    pujamax = fields.Char(size=15, string='Nacion de la lote')
-    tiempo = fields.Char(size=15, string='Idioma')
+    catnum = fields.Integer(string='Número de catálogo', required=True)
+    salida = fields.Float(string='Precio de salida', required=True)
+    pujamax = fields.Float(string='Mayor puja', default=0)
+    tiempo = fields.Datetime(string='Tiempo de subasta restante')
+
+    lotPro = fields.One2many(comodel_name='producto', inverse_name='proLot', string='Contiene')
+    lotPuj = fields.One2many(comodel_name='puja', inverse_name='pujLot', string='Lote-Puja')
     
-    pujalote = fields.One2many(comodel_name='puja', inverse_name='espujalote', string='lote-puja')
-    pujapro = fields.One2many(comodel_name='reparto', inverse_name='espujapro', string='lote-producto')
-    
-    @api.constrains('anio')
-    def validarAnio(self):
-        if self.anio < datetime.strptime("01/01/1895","%d/%m/%Y").date():
-            raise ValidationError("La lote ha de ser posterior a 1895")
+    @api.constrains('salida')
+    def validaPrecioSalida(self):
+        if self.salida < 0:
+            raise ValidationError("El precio de salida no puede ser negativo")
+
+    @api.onchange('lotPuj')
+    def modificarPujaMax(self):
+        pujamax = self.lotPuj.cantidad
+        #self.env.cr.execute("SELECT cantidad FROM puja WHERE id = " + str(self.lotPuj))
+        #pujamax = cantidad
 
 
 class puja(models.Model):
     _name = "puja"
     _descripcion = "Puja"
 
+    _rec_name = "cantidad"
 
-    cantidad = fields.Char(string='Personaje', required=True)
-    dia = fields.Date('dia')
-    hora = fields.Datetime('hora')
+    dia = fields.Date(string='Dia', default=datetime.now().date(), readonly=True)
+    hora = fields.Datetime(string='Hora', default=datetime.now(), readonly=True)
+    cantidad = fields.Integer(string='Cantidad')
 
-    espujacli = fields.Many2one(comodel_name='cliente', string='puja-cliente')
-    espujalote = fields.Many2one(comodel_name='lote', string='puja-lote')
+    pujLot = fields.Many2one(comodel_name='lote', string='Puja-Lote')
+    pujCli = fields.Many2one(comodel_name='cliente', string='Puja-Cliente')
 
-    @api.constrains('personaje')
-    def validarPersonaje(self):
-        if len(self.search([('personaje','=',self.personaje)]))>1:
-            if len(self.search([('repActor','=',self.repActor.nombre)]))>1:
-                if len(self.search([('repPeli','=',self.repPeli.titulo)]))>1:
-                    raise ValidationError("No")
+    @api.constrains('cantidad')
+    def validar_pujamax(self):
+        if self.cantidad != "":
+                self.env.cr.execute("SELECT pujamax FROM lote WHERE catnum = " + str(self.pujLot.catnum))
+                pujaMax = self.env.cr.fetchone()[0]
+                if self.cantidad < pujaMax :
+                    raise ValidationError("El valor tiene que ser a la puja máxima actual")
 
 
-class producto(models.Model):
-    _name = "producto"
-    _descripcion = "producto del lote"   
+class cliente(models.Model):
+    _name = "cliente"
+    _descripcion = "Cliente"
 
-    _rec_name = "codigo"
+    _rec_name = "nombre"
 
-    codigo = fields.Char(string='Nombre')
-    nombre = fields.Char(string='Nacionalidad del actor')
-    desc = fields.Char(string='Nombre')
-    foto = fields.Binary(string='foto', help="Seleccionar imagen aquí")
+    usuario = fields.Char(size=20, string='Usuario', required=True)
+    clave = fields.Char(size=30, string='Contraseña', required=True)
+    email = fields.Char(size=40, string='Email')
+    nombre = fields.Char(size=15, string='Nombre')
 
-    espujapro = fields.Many2one(comodel_name='puja', string='puja-producto')
-    
+    cliPuj = fields.One2many(comodel_name='puja', inverse_name='pujCli', string='Cliente-Puja')
+
+    @api.constrains('usuario')
+    def validarUsuario(self):
+        if len(self.search([('usuario','=',self.usuario)]))>1:
+            raise ValidationError("No puede haber dos usuarios iguales")

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Subastas",#Cambiar
+    'name': "Subastas",
 
     'summary': """
         Short (1 phrase/line) summary of the module's purpose, used as
@@ -23,7 +23,7 @@
     'depends': ['base'],
 
     # always loaded
-    'data': [#Cambiar
+    'data': [
         # 'security/ir.model.access.csv',
         'views/views.xml',
     ],
@@ -31,7 +31,7 @@
     'demo': [
         'demo/demo.xml',
     ],
-    'installable': True,#Añadir
+    'installable': True,
     'application': True,
     'auto_install': False,
 }
